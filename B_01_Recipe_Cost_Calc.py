@@ -40,7 +40,7 @@ def float_checker(question, category):
             response = float(input(question))
 
             # Checks number isn't negative
-            if response >= 0:
+            if response > 0:
                 return response
             else:
                 print(f"Invalid! Please enter a valid {category}!")

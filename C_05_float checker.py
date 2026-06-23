@@ -7,15 +7,16 @@ def float_checker(question, category):
             response = float(input(question))
 
             # Checks number isn't negative
-            if response >= 0:
+            if response > 0:
                 return response
             else:
-                print(f"Invalid! Please enter a valid {category}!")
+                print(f"Please enter a valid {category}! (more than 0)")
 
         except ValueError:
-            print("Invalid number, please enter a valid number!")
+            print("Please enter a valid number (more than 0)!")
 
 # main
-float_checker("Enter a number: ", "price")
+while True:
+    float_checker("Enter a number: ", "price")
 
 

@@ -44,9 +44,6 @@ def instructions():
 
 
 # Main routine goes here
-
-print(make_statement("Fund Raising Calculator", "💰"))
-
 print()
 want_instructions = not_blank_and_valid_ans("Do you want to see the instructions? ",    ["yes", "no"])
 print()

@@ -25,33 +25,35 @@ def instructions():
     """Displays instructions"""
     print(make_statement("Instructions", "ℹ️"))
 
-    print('''This program will ask you for... 
-    - The name of the product you are selling 
-    - How many items you plan on selling 
-    - The costs for each component of the product 
-      (variable expenses)
-    - Whether or not you have fixed expenses (if you have 
-      fixed expenses, it will ask you what they are).
-    - How much money you want to make (ie: your profit goal)
+    print('''Welcome to Recipe Cost Calculator!
+    
+This program helps calculate the total cost of making a recipe and figures out 
+cost per serving. It also calculates how much of each ingredient costs for the recipe.
 
-It will also ask you how much the recommended sales price should 
-be rounded to.
+To use it:
+- Enter the name of your recipe and serving size.
+- For each ingredient, you will be asked to enter:
+  - The ingredient name (eg. Milk, Flour, Eggs)
+  - The amount needed for the recipe (eg. 250g, 200ml, 5 pc)
+  - The total amount bought at the store (eg, 2kg, 1.5L, 10 pc)
+  - The price you paid for the amount bought
+- When you are finished entering ingredients, type 'xxx' in the ingredient name question to stop.
 
-The program outputs an itemised list of the variable and fixed 
-expenses (which includes the subtotals for these expenses). 
+This program also automatically converts units (such as kg to g and l to ml, or the other way round).
+This is to calculate the exact cost of the portion of the ingredient you used.
 
-Finally it will tell you how much you should sell each item for 
-to reach your profit goal. 
+It will also output:
+- A printed breakdown of the ingredients, amounts, and costs.
+- The overall cost of the recipe, and cost per serving.
+- A saved text file named after the recipe name containing all the data.
 
-The data will also be written to a text file which has the 
-same name as your product and today's date.
-
+Enjoy! 
     ''')
 
 
 # Main routine goes here
 
-print(make_statement("Fund Raising Calulator", "💰"))
+print(make_statement("Recipe Cost Calculator", "📖"))
 
 print()
 want_instructions = yes_no_check("Do you want to see the instructions? ")
