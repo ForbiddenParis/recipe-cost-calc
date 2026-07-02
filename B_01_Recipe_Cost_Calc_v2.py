@@ -48,7 +48,7 @@ def yes_no_check(question):
         elif response == "n" or response == "no":
             return "no"
 
-        print(f"Please answer yes / no (y / n)")
+        print("Please answer yes / no (y / n)")
 
 def not_blank(question):
     """Checks that a user response is not blank"""
