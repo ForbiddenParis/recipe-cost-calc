@@ -1,7 +1,6 @@
 import pandas
 from tabulate import tabulate
 
-# Functions go here
 def make_statement(statement, decoration):
     """Emphasizes headings by adding decoration
     at the start and end"""
@@ -120,19 +119,19 @@ def amount_analyser(question):
             amount = "invalid choice"
 
 
-        # Error message if unit and amount invalid
+        # error message if unit and amount invalid
         if unit == "invalid choice" and amount == "invalid choice":
             print(f"Invalid Choice! Please enter a valid unit and amount"
                   f"Pick from {valid_units}")
             continue
 
-            # Error message if just is unit invalid
+        # error message if just is unit invalid
         elif unit == "invalid choice":
             print(f"Invalid Choice! Please enter a valid unit"
                   f"Pick from {valid_units}")
             continue
 
-        # Error message if just amount is invalid
+        # error message if just amount is invalid
         elif amount == "invalid choice":
             print("Invalid Choice! Please enter a valid amount")
             continue
@@ -153,7 +152,7 @@ all_need_amounts = []
 all_total_amounts = []
 all_ing_costs = []
 
-# Data Frame Dictionary
+# dataframe dictionary
 ingredient_info_dict = {
     'Ingredient Name': all_ing_names,
     'Price': all_prices,
@@ -187,26 +186,31 @@ while ing != "xxx":
     else:
         all_ing_names.append(ing)
 
-    # calculates and changes
+    # amount of ingredient needed
     calc_needed, amount_needed = amount_analyser(f"Amount of {ing} needed: ")
     print(f"Calculated (in grams/ml): {calc_needed:.2f}")
     print(f"Formatted Output: {amount_needed}\n")
     all_need_amounts.append(amount_needed)
 
+    # amount of ingredient bought
     calc_bought, amount_bought = amount_analyser(f"Amount of {ing} bought: ")
     print(f"Calculated (in grams/ml): {calc_bought:.2f}")
     print(f"Formatted Output: {amount_bought}\n")
     all_total_amounts.append(amount_bought)
 
+    # price
     ing_price = float_checker(f"Amount of {ing} price: ", "price")
     all_prices.append((currency(ing_price)))
     print(all_prices)
 
+    # calculations for ingredient
     ing_cost = (ing_price / calc_bought) * calc_needed
     all_ing_costs.append((currency(ing_cost)))
 
+    # overall recipe cost
     recipe_cost += ing_cost
 
+# calculates cost per serving
 cost_per_serving = recipe_cost / serving_size
 print(cost_per_serving)
 
@@ -217,7 +221,7 @@ ing_needed_string = tabulate(ingredients_frame[['Ingredient Name', 'Amount Neede
 ing_bought_string = tabulate(ingredients_frame[['Ingredient Name', 'Amount Total', 'Price', 'Ingredient Cost']], headers='keys',
                           tablefmt='psql', showindex=False)
 
-# headings / strings...
+# headings / strings
 main_heading_string = make_statement(f"Recipe Cost Calculator", "=")
 recipe_name_string = f"Recipe Name: {recipe_name}"
 serving_string = f"Serving Size: {serving_size}"
@@ -232,11 +236,12 @@ to_write = [main_heading_string, "\n", serving_string, recipe_name_string,
             "\n", cost_ing_string, ing_bought_string,
             recipe_cost_string, serving_cost_string]
 
-# Print area
+# print area
 print()
 for item in to_write:
     print(item)
 
+# file name
 file_name = f"{recipe_name}"
 write_to = "{}.txt".format(file_name)
 

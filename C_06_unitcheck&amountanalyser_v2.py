@@ -15,7 +15,7 @@ def unit_check(choice, options):
     for var_list in options:
         # If the user's unit is anywhere in that row of valid units
         if choice in var_list:
-            return var_list[0].lower() # Return the shorthand (e.g., "g")
+            return var_list[0].lower() # return the lowercase
     return "invalid choice"
 
 
@@ -65,17 +65,17 @@ def amount_analyser(question):
             amount = "invalid choice"
 
 
-        # Error message if unit and amount invalid
+        # error message if unit and amount invalid
         if unit == "invalid choice" and amount == "invalid choice":
             print("Invalid Choice! Please enter a valid unit and amount")
             continue
 
-            # Error message if just is unit invalid
+        # error message if just is unit invalid
         elif unit == "invalid choice":
             print("Invalid Choice! Please enter a valid unit")
             continue
 
-        # Error message if just amount is invalid
+        # error message if just amount is invalid
         elif amount == "invalid choice":
             print("Invalid Choice! Please enter a valid amount")
             continue
@@ -89,9 +89,8 @@ def amount_analyser(question):
         return calc_amount, output_amount
 
 # main
-# Test with a normal ingredient
-
 ing = ""
+# looping
 while ing != "xxx":
     ing = not_blank("Ingredient: ")
 

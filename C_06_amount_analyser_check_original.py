@@ -62,10 +62,10 @@ conversions = {
 
 while ing != "xxx":
 
-    # The ingredients
+    # asking for ingredient
     ing = not_blank("Ingredient: ")
 
-    # Breaking the loop
+    # breaks loop if xxx
     if ing == "xxx":
         break
 
@@ -75,18 +75,20 @@ while ing != "xxx":
     recipe_unit = unit_checker("Unit: ")
     print()
 
-    # getting the Amount bought
+    # getting the amount bought
     bought_amount = num_check("Amount Bought: ")
-    # getting the Unit bought
+    # getting the anit bought
     bought_unit = unit_checker("Unit: ")
     price_bought = num_check("Price Bought: $")
     print()
 
+    # calculations for units
     amount_needed = recipe_amount * conversions[recipe_unit]
     amount_bought = bought_amount * conversions[bought_unit]
     print(amount_needed)
     print(amount_bought)
 
+    # cost
     cost = (price_bought/amount_bought) * amount_needed
     print(f"${cost}")
 

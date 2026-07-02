@@ -12,7 +12,7 @@ def not_blank(question):
 def unit_check(choice, options):
     """Checks if a user input is valid and returns lowercase and unit_type"""
     for i in range(len(options)):
-        # If the user's unit is anywhere in that row of valid units
+        # if the user's unit is anywhere in that row of valid units
         if choice in options[i]:
             # returns lowercase of the unit
             lowercase = options[i][0].lower()
@@ -29,7 +29,7 @@ def unit_check(choice, options):
 
 
 def amount_analyser(question, required_type=None):
-    """Asks for amount and unit, validates them, and coverts them to base (g, ml)"""
+    """Asks for amount and unit, validates them, and coverts them to base (g, ml) except for pc"""
     conversions = {
         "g": 1, "kg": 1000, "ml": 1, "l": 1000, "pc": 1
     }
@@ -66,25 +66,33 @@ def amount_analyser(question, required_type=None):
         # checking the unit and what unit type it is
         unit, unit_type = unit_check(desired_unit, valid_units)
 
+        print(desired_amount)
+        print(desired_unit)
+
+
+
         # checks if amount is none
         if desired_amount == "":
             amount = "invalid choice"
-        # checks if amount is over 0
 
+        # checks if there is more than one of "-" or "." in users answer
+        elif desired_amount.count("-") > 1 or desired_amount.count(".") > 1:
+            amount = "invalid choice"
+
+        # floats the desired amount to make it not a string
         else:
             amount = float(desired_amount)
 
-        # checks if amount is over 0
-        if amount < 0:
-            amount = "invalid choice"
+            # checks if amount is over 0
+            if amount < 0:
+                amount = "invalid choice"
 
-
-        # Error message if unit and amount invalid
+        # error message if unit and amount invalid
         if unit == "invalid choice" and amount == "invalid choice":
             print("Invalid Choice! Please enter a valid unit and amount")
             continue
 
-        # Error message if just is unit invalid
+        # error message if just is unit invalid
         elif unit == "invalid choice":
             print("Invalid Choice! Please enter a valid unit")
             continue
@@ -111,9 +119,9 @@ def amount_analyser(question, required_type=None):
         return calc_amount, output_amount, unit_type
 
 # main
-# Test with a normal ingredient
-
 ing = ""
+
+# looping
 while ing != "xxx":
     ing = not_blank("Ingredient: ")
 

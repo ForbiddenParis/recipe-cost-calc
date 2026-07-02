@@ -13,7 +13,9 @@ def yes_no_check(question):
 
         print(f"Please answer yes / no (y / n)")
 
+# main
 user_response = ""
+# looping
 while user_response != "xxx":
     user_response = yes_no_check("Do you want to see the instructions? ")
     print()

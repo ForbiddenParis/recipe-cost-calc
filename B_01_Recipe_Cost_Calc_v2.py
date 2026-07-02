@@ -1,8 +1,7 @@
 import pandas
 from tabulate import tabulate
 
-
-# Functions go here
+# functions go here
 def make_statement(statement, decoration):
     """Emphasizes headings by adding decoration
     at the start and end"""
@@ -42,7 +41,6 @@ def yes_no_check(question):
     """Checks that users enter yes / no / y / n"""
 
     while True:
-        # user response
         response = input(question).lower()
         # checking if response is y/n
         if response == "y" or response == "yes":
@@ -55,9 +53,7 @@ def yes_no_check(question):
 def not_blank(question):
     """Checks that a user response is not blank"""
 
-
     while True:
-        # asks user question
         response = input(question)
         # checks if response is blank
         if response != "":
@@ -73,19 +69,19 @@ def float_checker(question, category):
         try:
             response = float(input(question))
 
-            # Checks number isn't negative
+            # checks number is not negative
             if response > 0:
                 return response
             else:
-                print(f"Please enter a valid {category}! (more than 0)")
+                print(f"Please enter a valid {category} (more than 0)")
 
         except ValueError:
-            print("Please enter a valid number (more than 0)!")
+            print("Please enter a valid number (more than 0)")
 
 def unit_check(choice, options):
     """Checks if a user input is valid and returns lowercase and unit_type"""
     for i in range(len(options)):
-        # If the user's unit is anywhere in that row of valid units
+        # checks iff the users unit is anywhere in that row of valid units
         if choice in options[i]:
             # returns lowercase of the unit
             lowercase = options[i][0].lower()
@@ -112,7 +108,7 @@ def amount_analyser(question, required_type=None):
         ["kg", "kilo", "kilograms", "kilogram"],
         ["ml", "millilitres", "milliliters"],
         ["l", "litres", "liters", "liter", "litre"],
-        ["pc", "pieces", "piece"]
+        ["pc", "pieces", "piece", ""]
     ]
     while True:
         desired_unit = ""
@@ -141,25 +137,30 @@ def amount_analyser(question, required_type=None):
         # checks if amount is none
         if desired_amount == "":
             amount = "invalid choice"
+
+        # checks if there is more than one of "-" or "." in users answer
+        elif desired_amount.count("-") > 1 or desired_amount.count(".") > 1:
+            amount = "invalid choice"
+
+        # floats desired amount to not make it a string
         else:
             amount = float(desired_amount)
 
-        # checks if amount is over 0
-        if amount < 0:
-            amount = "invalid choice"
+            # checks if amount is over 0
+            if amount < 0:
+                amount = "invalid choice"
 
-
-        # Error message if unit and amount invalid
+        # error message if unit and amount invalid
         if unit == "invalid choice" and amount == "invalid choice":
             print("Invalid Choice! Please enter a valid unit and amount")
             continue
 
-        # Error message if just is unit invalid
+        # error message if just is unit invalid
         elif unit == "invalid choice":
             print("Invalid Choice! Please enter a valid unit")
             continue
 
-        # Error message if just amount is invalid
+        # error message if just amount is invalid
         elif amount == "invalid choice":
             print("Invalid Choice! Please enter a valid amount")
             continue
@@ -189,7 +190,7 @@ all_need_amounts = []
 all_total_amounts = []
 all_ing_costs = []
 
-# Data Frame Dictionary
+# dataframe dictionary
 ingredient_info_dict = {
     'Ingredient Name': all_ing_names,
     'Price': all_prices,
@@ -202,23 +203,27 @@ ingredient_info_dict = {
 ing = ""
 recipe_cost = 0
 
+# prints title
 print(make_statement("Recipe Cost Calculator", "📖"))
 print()
 
+# asks user if they want to see instructions
 want_instructions = yes_no_check("Do you want to see the instructions?")
 print()
 
+# prints instructions if user says yes
 if want_instructions == "yes":
     instructions()
 
 # recipe name and serving size
 recipe_name = not_blank("Recipe Name: ")
-serving_size = float_checker("Serving size: ", "serving_size")
+serving_size = float_checker("Serving size: ", "serving size")
 print()
 
 while ing != "xxx":
+
+    # asks user for ingredient name
     ing = not_blank("Ingredient: ")
-    print()
 
     # end loop if exit code is entered
     if ing == "xxx":
@@ -226,10 +231,13 @@ while ing != "xxx":
     # checks if the user has any digits in their ingredient name (not valid)
     if any(i.isdigit() for i in ing):
         print("Error, please enter a valid ingredient")
+        print()
         continue
     # adds ingredient name to list if valid
     else:
         all_ing_names.append(ing)
+
+    print()
 
     # calculates and checks amount needed
     calc_needed, amount_needed, current_unit_type = amount_analyser(f"Amount of {ing} needed: ")
@@ -261,7 +269,7 @@ ing_needed_string = tabulate(ingredients_frame[['Ingredient Name', 'Amount Neede
 ing_bought_string = tabulate(ingredients_frame[['Ingredient Name', 'Amount Total', 'Price', 'Ingredient Cost']], headers='keys',
                           tablefmt='fancy_grid', showindex=False)
 
-# headings / strings...
+# headings / strings
 main_heading_string = make_statement(f"Recipe Cost Calculator", "=")
 recipe_name_string = f"Recipe Name: {recipe_name}"
 serving_string = f"Serving Size: {serving_size}"
@@ -276,7 +284,7 @@ to_write = [main_heading_string, recipe_name_string, serving_string,
             "\n", cost_ing_string, ing_bought_string,"\n",
             recipe_cost_string, serving_cost_string]
 
-# Print area
+# print area
 print()
 for item in to_write:
     print(item)
