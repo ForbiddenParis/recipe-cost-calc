@@ -108,7 +108,7 @@ def amount_analyser(question, required_type=None):
         ["kg", "kilo", "kilograms", "kilogram"],
         ["ml", "millilitres", "milliliters"],
         ["l", "litres", "liters", "liter", "litre"],
-        ["pc", "pieces", "piece", ""]
+        ["pc", "pieces", "piece"]
     ]
     while True:
         desired_unit = ""
